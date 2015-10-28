@@ -9,8 +9,10 @@
 // Modified By: Austin, Stephen (saustin)
 
 using System.Net;
+using System.Net.Http.Formatting;
 using System.Web.Http;
 using Microsoft.Owin;
+using Newtonsoft.Json;
 using Owin;
 using Prototype;
 
@@ -23,10 +25,12 @@ namespace Prototype
         public void Configuration(IAppBuilder app)
         {
             var http = new HttpConfiguration();
+            http.Formatters.Clear();
+            http.Formatters.Add(new JsonMediaTypeFormatter());
             http.MapHttpAttributeRoutes();
             app.UseWebApi(http);
 
-            WebRequest.DefaultWebProxy = new WebProxy("http://localhost:8888/");
+            //WebRequest.DefaultWebProxy = new WebProxy("http://localhost:8888/");
         }
     }
 }
