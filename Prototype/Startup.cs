@@ -8,6 +8,7 @@
 // Modified On: 10/28/2015 9:22 AM
 // Modified By: Austin, Stephen (saustin)
 
+using System.Net;
 using System.Web.Http;
 using Microsoft.Owin;
 using Owin;
@@ -24,6 +25,8 @@ namespace Prototype
             var http = new HttpConfiguration();
             http.MapHttpAttributeRoutes();
             app.UseWebApi(http);
+
+            WebRequest.DefaultWebProxy = new WebProxy("http://localhost:8888/");
         }
     }
 }

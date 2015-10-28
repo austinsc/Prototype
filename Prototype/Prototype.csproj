@@ -183,8 +183,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\DataController.cs" />
-    <Compile Include="Data.cs" />
+    <Compile Include="Scantron\Data.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scantron\Engine.cs" />
+    <Compile Include="Scantron\Extensions.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -219,6 +221,8 @@
           <DevelopmentServerPort>57088</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:57088/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:57088/api/data/teams</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
