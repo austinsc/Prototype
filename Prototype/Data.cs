@@ -40,7 +40,7 @@ namespace Prototype
             DefaultFileSystem = DatabaseName
         }.Initialize());
 
-        public static string ConnectionString { get; } = "http://localhost:8080/";
+        public static string ConnectionString { get; } = "http://remote.pwnt.co:8080/";
 
         public static string DatabaseName { get; } = "no-defeat";
 
