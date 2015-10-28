@@ -13,6 +13,7 @@ using System.Net.Http.Formatting;
 using System.Web.Http;
 using Microsoft.Owin;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using Owin;
 using Prototype;
 
@@ -27,6 +28,10 @@ namespace Prototype
             var http = new HttpConfiguration();
             http.Formatters.Clear();
             http.Formatters.Add(new JsonMediaTypeFormatter());
+            http.Formatters.JsonFormatter.SerializerSettings = new JsonSerializerSettings
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            };
             http.MapHttpAttributeRoutes();
             app.UseWebApi(http);
 
