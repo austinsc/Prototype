@@ -36,17 +36,7 @@ namespace Prototype.Scantron
     public static class Engine
     {
         private static readonly RiotApi _api = RiotApi.GetInstance("50a768a2-4d69-47fc-806c-8fe097212256");
-
-        static Engine()
-        {
-            //BsonClassMap.RegisterClassMap<Team>(cm =>
-            //{
-            //    cm.AutoMap();
-            //    cm.MapIdMember(c => c.FullId).SetIdGenerator(StringObjectIdGenerator.Instance);
-            //});
-            ConventionRegistry.Register("camel case", new ConventionPack { new CamelCaseElementNameConvention() }, t => true);
-        }
-
+        
         public static async Task<IEnumerable<Team>> RetrieveTeams()
         {
             var result = new List<Team>();
