@@ -5,7 +5,7 @@
 // express prior written permission.
 // 
 // Filename:    Engine.cs
-// Modified On: 11/12/2015 4:40 PM
+// Modified On: 11/12/2015 4:42 PM
 // Modified By: Austin, Stephen (saustin)
 
 using System;
@@ -13,7 +13,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 using Newtonsoft.Json;
 using RiotSharp;
@@ -36,7 +35,7 @@ namespace Prototype.Scantron
     public static class Engine
     {
         private static readonly RiotApi _api = RiotApi.GetInstance("50a768a2-4d69-47fc-806c-8fe097212256");
-        
+
         public static async Task<IEnumerable<Team>> RetrieveTeams()
         {
             var result = new List<Team>();
