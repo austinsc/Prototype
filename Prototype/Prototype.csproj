@@ -65,8 +65,8 @@
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="RiotSharp, Version=2.3.5723.25973, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RiotSharp.2.3.0\lib\net45\RiotSharp.dll</HintPath>
+    <Reference Include="RiotSharp, Version=2.3.5723.25982, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RiotSharp.2.3.1\lib\net45\RiotSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -188,8 +188,6 @@
   <ItemGroup>
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scantron\Engine.cs" />
-    <Compile Include="Scantron\Extensions.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -201,7 +199,12 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Prototype.Core\Prototype.Core.csproj">
+      <Project>{77c6fce7-58c6-4eb6-bfa3-2516f292a54f}</Project>
+      <Name>Prototype.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

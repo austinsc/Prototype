@@ -5,13 +5,13 @@
 // express prior written permission.
 // 
 // Filename:    Extensions.cs
-// Modified On: 10/28/2015 9:41 AM
-// Modified By: Austin, Stephen (saustin)
+// Modified On: 11/12/2015 11:23 PM
+// Modified By: Stephen C. Austin (stephen.austin)
 
 using System;
 using System.Collections.Generic;
 
-namespace Prototype.Scantron
+namespace Prototype.Core
 {
     internal static class Extensions
     {

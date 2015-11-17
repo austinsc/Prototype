@@ -5,8 +5,8 @@
 // express prior written permission.
 // 
 // Filename:    Engine.cs
-// Modified On: 11/12/2015 4:42 PM
-// Modified By: Austin, Stephen (saustin)
+// Modified On: 11/12/2015 11:23 PM
+// Modified By: Stephen C. Austin (stephen.austin)
 
 using System;
 using System.Collections.Generic;
@@ -19,7 +19,7 @@ using RiotSharp;
 using RiotSharp.MatchEndpoint;
 using Team = RiotSharp.TeamEndpoint.Team;
 
-namespace Prototype.Scantron
+namespace Prototype.Core
 {
     public static class Data
     {
@@ -40,7 +40,7 @@ namespace Prototype.Scantron
         {
             var result = new List<Team>();
             var league = await _api.GetChallengerLeagueAsync(Region.na, Queue.RankedTeam5x5);
-            foreach(var chunk in league.Entries.Chunk(10))
+            foreach (var chunk in league.Entries.Chunk(10))
             {
                 var teams = await _api.GetTeamsAsync(Region.na, chunk.Select(x => x.PlayerOrTeamId).ToList());
                 result.AddRange(teams.Values);
@@ -54,19 +54,29 @@ namespace Prototype.Scantron
             var challenger = await _api.GetChallengerLeagueAsync(region, Queue.RankedTeam5x5);
             var masters = await _api.GetMasterLeagueAsync(region, Queue.RankedTeam5x5);
             var result = new List<MatchDetail>();
-            foreach(var chunk in challenger.Entries.Concat(masters.Entries).Chunk(10))
+            foreach (var chunk in challenger.Entries.Concat(masters.Entries).Chunk(10))
             {
                 var teams = await _api.GetTeamsAsync(region, chunk.Select(x => x.PlayerOrTeamId).ToList());
-                foreach(var id in teams.Values.SelectMany(x => x.MatchHistory).Select(x => x.GameId).Distinct())
-                    if(await Data.Matches.CountAsync(Builders<BsonDocument>.Filter.Eq("matchId", id), new CountOptions { Limit = 1 }) == 0)
-                    {
-                        var match = await _api.GetMatchAsync(region, id, true);
-                        if(match != null)
+                try
+                {
+                    foreach (var id in teams.Values.SelectMany(x => x.MatchHistory).Select(x => x.GameId).Distinct())
+                        if (await Data.Matches.CountAsync(Builders<BsonDocument>.Filter.Eq("matchId", id), new CountOptions
                         {
-                            await Data.Matches.InsertOneAsync(BsonDocument.Parse(JsonConvert.SerializeObject(match)));
-                            result.Add(match);
+                            Limit = 1
+                        }) == 0)
+                        {
+                            var match = await _api.GetMatchAsync(region, id, true);
+                            if (match != null)
+                            {
+                                await Data.Matches.InsertOneAsync(BsonDocument.Parse(JsonConvert.SerializeObject(match)));
+                                result.Add(match);
+                            }
                         }
-                    }
+                }
+                catch
+                {
+
+                }
             }
             return result;
         }
